@@ -11,43 +11,50 @@ internal class FichierGestion
     /// </summary>
     /// <param name="cheminFichier"></param>
     /// <returns>tableau de mots issus du fichier source</returns>
- 
+
     public static string[] ChargerEtNormaliser(string cheminFichier)
     {
-        // Vérifier si le fichier existe
         if (!File.Exists(cheminFichier))
         {
             throw new FileNotFoundException($"Le fichier {cheminFichier} est introuvable.");
         }
 
-        // Charger les lignes du fichier
         string[] lignes = File.ReadAllLines(cheminFichier);
 
-        // Nettoyer et normaliser les lignes
         return NormaliserLignes(lignes);
     }
-
     #endregion
 
-    // Méthode pour normaliser un tableau de lignes
+    /// <summary>
+    /// Méthode qui met au propre le fichier texte avec les mots
+    /// </summary>
+    /// <param name="lignes"></param>
+    /// <returns>Tableau de mots</returns>
     private static string[] NormaliserLignes(string[] lignes)
     {
-        List<string> lignesNettoyees = new List<string>();
+        int taille = 0;
 
         foreach (string ligne in lignes)
         {
-            // Supprimer les espaces inutiles
-            string mot = ligne.Trim();
-            mot = Regex.Replace(mot, @"\s{2,}", " "); // Réduit les espaces multiples à un seul
+            string mot = Regex.Replace(ligne.Trim(), @"\s{2,}", " ").Trim();
+            if (!string.IsNullOrEmpty(mot)) taille++;
+        }
 
-            // Ajouter uniquement les lignes non vides
+        // Étape 2 : Créer un tableau pour les mots valides
+        string[] lignesNettoyees = new string[taille];
+        int index = 0;
+
+        foreach (string ligne in lignes)
+        {
+            string mot = Regex.Replace(ligne.Trim(), @"\s{2,}", " ").Trim();
             if (!string.IsNullOrEmpty(mot))
             {
-                lignesNettoyees.Add(mot.ToUpper()); // Convertir en majuscules
+                lignesNettoyees[index] = mot.ToUpper();
+                index++;
             }
         }
 
-        return lignesNettoyees.ToArray();
+        return lignesNettoyees;
     }
 
     // Méthode pour sauvegarder un tableau dans un fichier
