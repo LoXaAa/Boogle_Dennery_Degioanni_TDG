@@ -20,6 +20,15 @@
             {
                 Console.WriteLine("Fichier introuvable. Vérifiez le chemin.");
             }
+
+            Random rand = new Random();
+
+            // Générer un plateau
+            Plateau plateau = new Plateau(rand);
+
+            // Afficher le plateau
+            plateau.Afficher();
+
         }
     }
 }
