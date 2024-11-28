@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 internal class FichierGestion
 {
@@ -14,14 +15,21 @@ internal class FichierGestion
 
     public static string[] ChargerEtNormaliser(string cheminFichier)
     {
+
         if (!File.Exists(cheminFichier))
         {
             throw new FileNotFoundException($"Le fichier {cheminFichier} est introuvable.");
         }
+        else
+        {
+            Console.WriteLine("Fichier avec la liste des mots valides trouvé !");
+            Thread.Sleep(2000);
+            Console.Write("\n");
+            string[] lignes = File.ReadAllLines(cheminFichier);
+            return NormaliserLignes(lignes);
+        }
 
-        string[] lignes = File.ReadAllLines(cheminFichier);
-
-        return NormaliserLignes(lignes);
+       
     }
     #endregion
 
@@ -33,6 +41,7 @@ internal class FichierGestion
     private static string[] NormaliserLignes(string[] lignes)
     {
         int taille = 0;
+
 
         foreach (string ligne in lignes)
         {
