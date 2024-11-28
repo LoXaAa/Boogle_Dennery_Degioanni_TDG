@@ -6,10 +6,15 @@ using System.Threading.Tasks;
 
 namespace Boogle_Dennery_Degioanni_TDG
 {
+    /// <summary>
+    /// Génère et affiche le tableau du jeu grâce aux dés générés aléatoirement
+    /// </summary>
     internal class Plateau
     {
+        #region Attribut classe plateau
         private De[,] matrice; // La matrice 4x4 de dés
-
+        #endregion
+        #region Création du plateau
         /// <summary>
         /// Constructeur du plateau.
         /// Génère une matrice 4x4 remplie de dés aléatoires.
@@ -27,7 +32,8 @@ namespace Boogle_Dennery_Degioanni_TDG
                 }
             }
         }
-
+        #endregion
+        #region Affichage du plateau
         /// <summary>
         /// Récupère les lettres visibles de chaque dé et les affiche sous forme de matrice 4x4.
         /// </summary>
@@ -44,5 +50,6 @@ namespace Boogle_Dennery_Degioanni_TDG
                 Console.WriteLine();
             }
         }
+        #endregion
     }
 }

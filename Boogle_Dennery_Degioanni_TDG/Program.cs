@@ -4,22 +4,45 @@
     {
         static void Main(string[] args)
         {
+
+            Console.WriteLine(@"     _ _____ _   _   ____  _   _   ____   ___   ___   ____ _     _____ 
+    | | ____| | | | |  _ \| | | | | __ ) / _ \ / _ \ / ___| |   | ____|
+ _  | |  _| | | | | | | | | | | | |  _ \| | | | | | | |  _| |   |  _|  
+| |_| | |___| |_| | | |_| | |_| | | |_) | |_| | |_| | |_| | |___| |___ 
+ \___/|_____|\___/  |____/ \___/  |____/ \___/ \___/ \____|_____|_____|");
+
+
+            Thread.Sleep(2000);
+            Console.WriteLine();
+
+
+
+            Console.WriteLine(@" ___       _ _   _       _ _           _   _             
+|_ _|_ __ (_) |_(_) __ _| (_)___  __ _| |_(_) ___  _ __  
+ | || '_ \| | __| |/ _` | | / __|/ _` | __| |/ _ \| '_ \ 
+ | || | | | | |_| | (_| | | \__ \ (_| | |_| | (_) | | | |
+|___|_| |_|_|\__|_|\__,_|_|_|___/\__,_|\__|_|\___/|_| |_|");
+
+            Thread.Sleep(2000);
+            Console.WriteLine();
+
             string cheminFichier = @"C:\Users\hugod\Desktop\ESILV\Cours\Semestre 3\Info\Algo POO\TD\Boogle_Dennery_Degioanni_TDG\MotsPossiblesFR.txt";
+            string cheminSauvegarde = @"C:\Users\hugod\Desktop\ESILV\Cours\Semestre 3\Info\Algo POO\TD\Boogle_Dennery_Degioanni_TDG\Boogle_Dennery_Degioanni_TDG\MotsPossiblesFR_Valide.txt";
 
-            if (File.Exists(cheminFichier))
-            {
-                Console.WriteLine("Fichier trouvé !");
+            string[] contenuNettoye = FichierGestion.ChargerEtNormaliser(cheminFichier);
 
-                string[] contenuNettoye = FichierGestion.ChargerEtNormaliser(cheminFichier);
-                string cheminSauvegarde = @"C:\Users\hugod\Desktop\ESILV\Cours\Semestre 3\Info\Algo POO\TD\Boogle_Dennery_Degioanni_TDG\Boogle_Dennery_Degioanni_TDG\MotsPossiblesFR_Valide.txt";
-                FichierGestion.SauvegarderFichier(cheminSauvegarde, contenuNettoye);
+            FichierGestion.SauvegarderFichier(cheminSauvegarde, contenuNettoye);
 
-                Console.WriteLine($"Fichier sauvegardé dans : {Path.GetFullPath("MotsPossiblesFR_Normalise.txt")}");
-            }
-            else
-            {
-                Console.WriteLine("Fichier introuvable. Vérifiez le chemin.");
-            }
+            Console.WriteLine($"Nouveau fichier sauvegardé dans : {Path.GetFullPath("comme : MotsPossiblesFR_Valide.txt")}");
+            Thread.Sleep(2000);
+
+            Console.WriteLine(@" ____    __  ____  _   _ _____   ____  _   _       _ _____ _   _ 
+|  _ \ _/_/_| __ )| | | |_   _| |  _ \| | | |     | | ____| | | |
+| | | | ____|  _ \| | | | | |   | | | | | | |  _  | |  _| | | | |
+| |_| |  _|_| |_) | |_| | | |   | |_| | |_| | | |_| | |___| |_| |
+|____/|_____|____/ \___/  |_|   |____/ \___/   \___/|_____|\___/ ");
+            Console.WriteLine();
+            Thread.Sleep(2000);
 
             Random rand = new Random();
 
