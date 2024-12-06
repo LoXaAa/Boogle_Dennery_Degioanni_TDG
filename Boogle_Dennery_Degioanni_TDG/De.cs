@@ -8,13 +8,15 @@ using static Boogle_Dennery_Degioanni_TDG.Plateau;
 namespace Boogle_Dennery_Degioanni_TDG
 {
     /// <summary>
-    /// Représente un dé utilisé dans le jeu Boggle, avec 6 faces contenant des lettres.
+    /// Classe De qui génère des dé à 6 faces aléatoires selon les règles d'occurence et renvoie une faces visible aléatoire
     /// </summary>
     internal class De
     {
-        private char[] faces;       // Les lettres sur les faces du dé
-        private char lettreVisible; // La lettre visible après un lancer
-
+        #region Attributs de la classe De
+        private char[] faces;       // Toutes les faces
+        private char lettreVisible; // La face visble
+        #endregion
+        #region Obtenir la lettre visible
         /// <summary>
         /// Propriété pour obtenir uniquement la lettre visible du dé.
         /// </summary>
@@ -22,7 +24,8 @@ namespace Boogle_Dennery_Degioanni_TDG
         {
             get { return lettreVisible; }
         }
-
+        #endregion
+        #region Génération du dé
         /// <summary>
         /// Constructeur par défaut.
         /// Génère un dé avec 6 lettres uniques aléatoires.
@@ -37,7 +40,8 @@ namespace Boogle_Dennery_Degioanni_TDG
             // Initialiser la lettre visible avec la première face
             lettreVisible = faces[0];
         }
-
+        #endregion
+        #region Lancé du dé 
         /// <summary>
         /// Simule un lancer du dé pour obtenir une lettre visible au hasard.
         /// </summary>
@@ -46,6 +50,6 @@ namespace Boogle_Dennery_Degioanni_TDG
         {
             lettreVisible = faces[random.Next(6)];
         }
-    }
+        #endregion
+    }
 }
-
