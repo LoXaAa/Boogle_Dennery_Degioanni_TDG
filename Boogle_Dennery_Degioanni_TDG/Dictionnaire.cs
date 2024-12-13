@@ -34,6 +34,24 @@ namespace Boogle_Dennery_Degioanni_TDG
             Array.Sort(mots);
         }
 
+        public bool RechDichoRecursif(string mot)
+        {
+            mot = mot.ToUpper();
+            return RechercheDichotomique(mot, 0, mots.Length - 1);
+        }
+
+        private bool RechercheDichotomique(string mot, int debut, int fin)
+        {
+            if (debut > fin) return false;
+
+            int milieu = (debut + fin) / 2;
+            int comparaison = string.Compare(mot, mots[milieu], StringComparison.Ordinal);
+
+            if (comparaison == 0) return true;
+            else if (comparaison < 0) return RechercheDichotomique(mot, debut, milieu - 1);
+            else return RechercheDichotomique(mot, milieu + 1, fin);
+        }
+
         public override string ToString()
         {
             return $"Dictionnaire ({langue}) - Nombre de mots : {mots.Length}";
