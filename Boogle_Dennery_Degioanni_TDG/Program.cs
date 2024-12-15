@@ -1,8 +1,29 @@
-﻿namespace Boogle_Dennery_Degioanni_TDG
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
+using Boogle_Dennery_Degioanni_TDG;
+
+
+namespace Boogle_Dennery_Degioanni_TDG
 {
     internal class Program
     {
-        static void Main(string[] a)
+
+        #region SaisirNombre
+        public static int SaisirNombre()
+        {
+            int result;
+            while (!int.TryParse(Console.ReadLine(), out result))
+            { }
+            return result;
+        }
+        #endregion
+
+
+        static void Main(string[] args)
         {
 
             Console.WriteLine(@"     _ _____ _   _   ____  _   _   ____   ___   ___   ____ _     _____ 
@@ -26,14 +47,55 @@
             Thread.Sleep(2000);
             Console.WriteLine();
 
-            string cheminFichier = @"C:\Users\hugod\Desktop\ESILV\Cours\Semestre 3\Info\Algo POO\TD\Boogle_Dennery_Degioanni_TDG\MotsPossiblesFR.txt";
-            string cheminSauvegarde = @"C:\Users\hugod\Desktop\ESILV\Cours\Semestre 3\Info\Algo POO\TD\Boogle_Dennery_Degioanni_TDG\Boogle_Dennery_Degioanni_TDG\MotsPossiblesFR_Valide.txt";
+            string cheminFichier = "";
+            string cheminSauvegarde = "";
+            string[] contenuNettoye;
+            string langueJeu = "FR";
 
-            string[] contenuNettoye = FichierGestion.ChargerEtNormaliser(cheminFichier);
+            ConsoleKeyInfo cki;
+            do
+            {
+                Console.WriteLine("Selection de la langue\n"
+                    + "Option 1 : Français\n"
+                    + "Option 2 : Anglais\n"
+                    + "\n"
+                    + "Selectionnez 1 ou 2 pour la langue");
+                    int choixLangue = SaisirNombre();
 
-            FichierGestion.SauvegarderFichier(cheminSauvegarde, contenuNettoye);
+                switch (choixLangue)
+                {
+                    case 1:
 
-            Console.WriteLine($"Nouveau fichier sauvegardé dans : {Path.GetFullPath("comme : MotsPossiblesFR_Valide.txt")}");
+                        Console.WriteLine("Le jeu va être lancé en français");
+                        langueJeu = "FR";
+                        cheminFichier = @"C:\Users\hugod\Desktop\ESILV\Cours\Semestre 3\Info\Algo POO\TD\Boogle_Dennery_Degioanni_TDG\MotsPossiblesFR.txt";
+                        cheminSauvegarde = @"C:\Users\hugod\Desktop\ESILV\Cours\Semestre 3\Info\Algo POO\TD\Boogle_Dennery_Degioanni_TDG\Boogle_Dennery_Degioanni_TDG\MotsPossiblesFR_Valide.txt";
+                         contenuNettoye = FichierGestion.ChargerEtNormaliser(cheminFichier);
+                        FichierGestion.SauvegarderFichier(cheminSauvegarde, contenuNettoye);
+                        Console.WriteLine($"Nouveau fichier sauvegardé dans : {Path.GetFullPath("comme : MotsPossiblesFR_Valide.txt")}");
+
+                        break;
+
+                    case 2:
+                        Console.WriteLine("Le jeu va être lancé en anglais");
+                        langueJeu = "EN";
+                        cheminFichier = @"C:\Users\hugod\Desktop\ESILV\Cours\Semestre 3\Info\Algo POO\TD\Boogle_Dennery_Degioanni_TDG\MotsPossiblesEN.txt";
+                        cheminSauvegarde = @"C:\Users\hugod\Desktop\ESILV\Cours\Semestre 3\Info\Algo POO\TD\Boogle_Dennery_Degioanni_TDG\Boogle_Dennery_Degioanni_TDG\MotsPossiblesEN_Valide.txt";
+                        contenuNettoye = FichierGestion.ChargerEtNormaliser(cheminFichier);
+                        FichierGestion.SauvegarderFichier(cheminSauvegarde, contenuNettoye);
+                        Console.WriteLine($"Nouveau fichier sauvegardé dans : {Path.GetFullPath("comme : MotsPossiblesEN_Valide.txt")}");
+                        
+
+                        break;
+
+
+                    default: break;
+                }
+                Console.WriteLine("Tapez Escape pour sortir du menu ou un numéro d'exercie");
+                cki = Console.ReadKey();
+
+            } while (cki.Key != ConsoleKey.Escape);
+
             Thread.Sleep(2000);
 
             Console.WriteLine(@" ____    __  ____  _   _ _____   ____  _   _       _ _____ _   _ 
@@ -41,6 +103,8 @@
 | | | | ____|  _ \| | | | | |   | | | | | | |  _  | |  _| | | | |
 | |_| |  _|_| |_) | |_| | | |   | |_| | |_| | | |_| | |___| |_| |
 |____/|_____|____/ \___/  |_|   |____/ \___/   \___/|_____|\___/ ");
+
+
             Console.WriteLine();
             Thread.Sleep(2000);
 
