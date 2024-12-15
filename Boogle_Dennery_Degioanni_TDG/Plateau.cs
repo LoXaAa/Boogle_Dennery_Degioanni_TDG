@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Boogle_Dennery_Degioanni_TDG.De;
 
 namespace Boogle_Dennery_Degioanni_TDG
 {
