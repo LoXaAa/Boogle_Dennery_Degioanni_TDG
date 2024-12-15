@@ -2,7 +2,7 @@
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void Main(string[] a)
         {
 
             Console.WriteLine(@"     _ _____ _   _   ____  _   _   ____   ___   ___   ____ _     _____ 
@@ -46,11 +46,22 @@
 
             Random rand = new Random();
 
-            // Générer un plateau
-            Plateau plateau = new Plateau(rand);
+            Console.WriteLine("Entrez la taille du plateau (par exemple, 4 pour un plateau 4x4) :");
+            int taillePlateau;
 
-            // Afficher le plateau
-            plateau.Afficher();
+            while (!int.TryParse(Console.ReadLine(), out taillePlateau) || taillePlateau <= 0)
+            {
+                Console.WriteLine("Veuillez entrer un nombre entier positif pour la taille du plateau :");
+            }
+
+            int nombreDe = taillePlateau * taillePlateau;
+
+            Console.WriteLine($"Création d'un plateau de {taillePlateau}x{taillePlateau} avec {nombreDe} dés.");
+
+            Plateau plateau = new Plateau(nombreDe, taillePlateau);
+
+            Console.WriteLine("Voici le plateau généré :");
+            plateau.AfficherPlateau();
 
         }
     }

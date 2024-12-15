@@ -24,33 +24,50 @@ namespace Boogle_Dennery_Degioanni_TDG
         {
             get { return lettreVisible; }
         }
-        #endregion
-        #region Génération du dé
-        /// <summary>
-        /// Constructeur par défaut.
-        /// Génère un dé avec 6 lettres uniques aléatoires.
-        /// </summary>
-        /// <param name="random">Instance de Random pour générer des lettres aléatoires.</param>
-        public De(Random random)
-        {
-            // Générer les lettres uniques aléatoires
-            char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
-            faces = alphabet.OrderBy(x => random.Next()).Take(6).ToArray();
+        #endregion 
 
-            // Initialiser la lettre visible avec la première face
+        // Constructeur qui initialise un dé avec des lettres sélectionnées dans une liste
+        public De(List<char> lettresDisponibles)
+        {
+            Random random = new Random();
+            faces = new char[6];
+            for (int i = 0; i < 6; i++)
+            {
+                int index = random.Next(lettresDisponibles.Count);
+                faces[i] = lettresDisponibles[index];
+                lettresDisponibles.RemoveAt(index); // Retirer la lettre utilisée
+            }
+
+            // Initialiser une face visible par défaut
             lettreVisible = faces[0];
         }
-        #endregion
-        #region Lancé du dé 
-        /// <summary>
-        /// Simule un lancer du dé pour obtenir une lettre visible au hasard.
-        /// </summary>
-        /// <param name="random">Instance de Random pour générer des valeurs aléatoires.</param>
-        public void Lance(Random random)
+
+        // Méthode pour lancer le dé et choisir une lettre aléatoire comme face visible
+        public void Lance(Random r)
         {
-            lettreVisible = faces[random.Next(6)];
+            int indexAleatoire = r.Next(0, faces.Length);
+            lettreVisible = faces[indexAleatoire];
         }
-        #endregion
+
+        // Méthode pour retourner une description du dé
+        public override string ToString()
+        {
+            return $"Faces : {string.Join(", ", faces)} | Face visible : {lettreVisible}";
+        }
+
+        // Méthode statique pour créer plusieurs dés
+        public static List<De> CreerDes(int nombreDe, List<char> lettresDisponibles)
+        {
+            List<De> des = new List<De>();
+
+            for (int i = 0; i < nombreDe; i++)
+            {
+                des.Add(new De(lettresDisponibles));
+            }
+
+            return des;
+        }
+
     }
 }
 
