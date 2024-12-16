@@ -24,9 +24,11 @@ namespace Boogle_Dennery_Degioanni_TDG
         {
             get { return lettreVisible; }
         }
-        #endregion 
-
-        // Constructeur qui initialise un dé avec des lettres sélectionnées dans une liste
+        #endregion
+        #region Constructeur qui initialise un dé
+        /// <summary>
+        /// Constructeur qui initialise un dé aléatoirement en se basant sur la liste des lettres disponibles
+        /// </summary>
         public De(List<char> lettresDisponibles)
         {
             Random random = new Random();
@@ -41,21 +43,21 @@ namespace Boogle_Dennery_Degioanni_TDG
             // Initialiser une face visible par défaut
             lettreVisible = faces[0];
         }
-
-        // Méthode pour lancer le dé et choisir une lettre aléatoire comme face visible
+        #endregion
+        #region Méthode qui lance le dé
+        /// <summary>
+        /// Méthode qui lance le dé aléatoirement (dé non pipé à 6 faces)
+        /// </summary>
         public void Lance(Random r)
         {
             int indexAleatoire = r.Next(0, faces.Length);
             lettreVisible = faces[indexAleatoire];
         }
-
-        // Méthode pour retourner une description du dé
-        public override string ToString()
-        {
-            return $"Faces : {string.Join(", ", faces)} | Face visible : {lettreVisible}";
-        }
-
-        // Méthode statique pour créer plusieurs dés
+        #endregion
+        #region Méthode qui génère et stock les dés lancés
+        /// <summary>
+        /// Méthode qui génère et stock dans une liste tous les dés lancés
+        /// </summary>
         public static List<De> CreerDes(int nombreDe, List<char> lettresDisponibles)
         {
             List<De> des = new List<De>();
@@ -67,6 +69,7 @@ namespace Boogle_Dennery_Degioanni_TDG
 
             return des;
         }
+        #endregion
 
-    }
+    }
 }

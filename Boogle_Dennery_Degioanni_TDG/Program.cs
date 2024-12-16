@@ -31,11 +31,8 @@ namespace Boogle_Dennery_Degioanni_TDG
 | |_| | |___| |_| | | |_| | |_| | | |_) | |_| | |_| | |_| | |___| |___ 
  \___/|_____|\___/  |____/ \___/  |____/ \___/ \___/ \____|_____|_____|");
 
-
             Thread.Sleep(2000);
             Console.WriteLine();
-
-
 
             Console.WriteLine(@" ___       _ _   _       _ _           _   _             
 |_ _|_ __ (_) |_(_) __ _| (_)___  __ _| |_(_) ___  _ __  
@@ -51,7 +48,8 @@ namespace Boogle_Dennery_Degioanni_TDG
             string[] contenuNettoye;
             string langueJeu = "FR";
 
-            ConsoleKeyInfo cki;
+            ConsoleKeyInfo cki = new ConsoleKeyInfo(); // Initialisation par défaut
+
             do
             {
                 Console.WriteLine("Selection de la langue\n"
@@ -59,39 +57,50 @@ namespace Boogle_Dennery_Degioanni_TDG
                     + "Option 2 : Anglais\n"
                     + "\n"
                     + "Selectionnez 1 ou 2 pour la langue");
-                    int choixLangue = SaisirNombre();
+
+                int choixLangue = SaisirNombre();
 
                 switch (choixLangue)
                 {
                     case 1:
                         Console.WriteLine("Le jeu va être lancé en français");
                         langueJeu = "FR";
-                        cheminFichier = @"C:\Users\carod\Desktop\Boogle_Dennery_Degioanni_POO\MotsPossiblesFR.txt";
-                        cheminSauvegarde = @"C:\Users\carod\Desktop\Boogle_Dennery_Degioanni_POO\MotsPossiblesFR_Valide.txt";
-
-                        contenuNettoye = FichierGestion.ChargerEtNormaliser(cheminFichier);
-                        FichierGestion.SauvegarderFichier(cheminSauvegarde, contenuNettoye);
-
-                        Console.WriteLine($"Nouveau fichier sauvegardé dans : {Path.GetFullPath(cheminSauvegarde)}");
+                        cheminFichier = "MotsPossiblesFR.txt";
+                        cheminSauvegarde = "MotsPossiblesFR_Valide.txt";
                         break;
 
                     case 2:
                         Console.WriteLine("Le jeu va être lancé en anglais");
                         langueJeu = "EN";
-                        cheminFichier = @"C:\Users\carod\Desktop\Boogle_Dennery_Degioanni_POO\MotsPossiblesEN.txt";
-                        cheminSauvegarde = @"C:\Users\carod\Desktop\Boogle_Dennery_Degioanni_POO\MotsPossiblesEN_Valide.txt";
-
-                        contenuNettoye = FichierGestion.ChargerEtNormaliser(cheminFichier);
-                        FichierGestion.SauvegarderFichier(cheminSauvegarde, contenuNettoye);
-
-                        Console.WriteLine($"Nouveau fichier sauvegardé dans : {Path.GetFullPath(cheminSauvegarde)}");
+                        cheminFichier = "MotsPossiblesEN.txt";
+                        cheminSauvegarde = "MotsPossiblesEN_Valide.txt";
                         break;
 
-
-
-                    default: break;
+                    default:
+                        Console.WriteLine("Choix invalide. Veuillez sélectionner 1 ou 2.");
+                        continue;
                 }
-                Console.WriteLine("Tapez Escape pour sortir du menu ou un numéro d'exercie");
+
+                try
+                {
+                    contenuNettoye = FichierGestion.ChargerEtNormaliser(cheminFichier);
+                    FichierGestion.SauvegarderFichier(cheminSauvegarde, contenuNettoye);
+
+                    string cheminComplet = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, cheminSauvegarde);
+                    Console.WriteLine($"Nouveau fichier sauvegardé dans : {cheminComplet}");
+                }
+                catch (FileNotFoundException ex)
+                {
+                    Console.WriteLine($"Erreur : {ex.Message}");
+                    continue;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Une erreur inattendue est survenue : {ex.Message}");
+                    continue;
+                }
+
+                Console.WriteLine("Tapez Escape pour sortir de l'initiatlisation et commencer le jeu");
                 cki = Console.ReadKey();
 
             } while (cki.Key != ConsoleKey.Escape);
@@ -104,8 +113,6 @@ namespace Boogle_Dennery_Degioanni_TDG
 | |_| |  _|_| |_) | |_| | | |   | |_| | |_| | | |_| | |___| |_| |
 |____/|_____|____/ \___/  |_|   |____/ \___/   \___/|_____|\___/ ");
 
-
-            Console.WriteLine();
             Thread.Sleep(2000);
 
             Random rand = new Random();
@@ -126,8 +133,29 @@ namespace Boogle_Dennery_Degioanni_TDG
 
             Console.WriteLine("Voici le plateau généré :");
             plateau.AfficherPlateau();
-            Console.ReadKey();
 
+            Console.ReadKey();
+            Console.WriteLine("\nEntrez un mot pour vérifier s'il est valide (ou tapez 'exit' pour quitter) :");
+            string mot;
+            while ((mot = Console.ReadLine()) != null && mot.ToLower() != "exit")
+            {
+                try
+                {
+                    bool estValide = plateau.VerifierMot(mot);
+                    Console.WriteLine(estValide ? $"Le mot '{mot}' est valide." : $"Le mot '{mot}' n'est pas valide.");
+                }
+                catch (ArgumentException ex)
+                {
+                    Console.WriteLine($"Erreur : {ex.Message}");
+                }
+
+                Console.WriteLine("\nEntrez un autre mot (ou tapez 'exit' pour quitter) :");
+            }
+
+            Console.WriteLine("Merci d'avoir joué !");
         }
+
     }
+
 }
+
