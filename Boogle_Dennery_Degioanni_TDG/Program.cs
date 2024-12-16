@@ -22,7 +22,6 @@ namespace Boogle_Dennery_Degioanni_TDG
         }
         #endregion
 
-
         static void Main(string[] args)
         {
             Console.WriteLine(@"     _ _____ _   _   ____  _   _   ____   ___   ___   ____ _     _____ 
