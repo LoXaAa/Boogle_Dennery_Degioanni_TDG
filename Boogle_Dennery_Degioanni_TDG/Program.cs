@@ -25,7 +25,6 @@ namespace Boogle_Dennery_Degioanni_TDG
 
         static void Main(string[] args)
         {
-
             Console.WriteLine(@"     _ _____ _   _   ____  _   _   ____   ___   ___   ____ _     _____ 
     | | ____| | | | |  _ \| | | | | __ ) / _ \ / _ \ / ___| |   | ____|
  _  | |  _| | | | | | | | | | | | |  _ \| | | | | | | |  _| |   |  _|  
@@ -65,28 +64,29 @@ namespace Boogle_Dennery_Degioanni_TDG
                 switch (choixLangue)
                 {
                     case 1:
-
                         Console.WriteLine("Le jeu va être lancé en français");
                         langueJeu = "FR";
-                        cheminFichier = @"C:\Users\hugod\Desktop\ESILV\Cours\Semestre 3\Info\Algo POO\TD\Boogle_Dennery_Degioanni_TDG\MotsPossiblesFR.txt";
-                        cheminSauvegarde = @"C:\Users\hugod\Desktop\ESILV\Cours\Semestre 3\Info\Algo POO\TD\Boogle_Dennery_Degioanni_TDG\Boogle_Dennery_Degioanni_TDG\MotsPossiblesFR_Valide.txt";
-                         contenuNettoye = FichierGestion.ChargerEtNormaliser(cheminFichier);
-                        FichierGestion.SauvegarderFichier(cheminSauvegarde, contenuNettoye);
-                        Console.WriteLine($"Nouveau fichier sauvegardé dans : {Path.GetFullPath("comme : MotsPossiblesFR_Valide.txt")}");
+                        cheminFichier = @"C:\Users\carod\Desktop\Boogle_Dennery_Degioanni_POO\MotsPossiblesFR.txt";
+                        cheminSauvegarde = @"C:\Users\carod\Desktop\Boogle_Dennery_Degioanni_POO\MotsPossiblesFR_Valide.txt";
 
+                        contenuNettoye = FichierGestion.ChargerEtNormaliser(cheminFichier);
+                        FichierGestion.SauvegarderFichier(cheminSauvegarde, contenuNettoye);
+
+                        Console.WriteLine($"Nouveau fichier sauvegardé dans : {Path.GetFullPath(cheminSauvegarde)}");
                         break;
 
                     case 2:
                         Console.WriteLine("Le jeu va être lancé en anglais");
                         langueJeu = "EN";
-                        cheminFichier = @"C:\Users\hugod\Desktop\ESILV\Cours\Semestre 3\Info\Algo POO\TD\Boogle_Dennery_Degioanni_TDG\MotsPossiblesEN.txt";
-                        cheminSauvegarde = @"C:\Users\hugod\Desktop\ESILV\Cours\Semestre 3\Info\Algo POO\TD\Boogle_Dennery_Degioanni_TDG\Boogle_Dennery_Degioanni_TDG\MotsPossiblesEN_Valide.txt";
+                        cheminFichier = @"C:\Users\carod\Desktop\Boogle_Dennery_Degioanni_POO\MotsPossiblesEN.txt";
+                        cheminSauvegarde = @"C:\Users\carod\Desktop\Boogle_Dennery_Degioanni_POO\MotsPossiblesEN_Valide.txt";
+
                         contenuNettoye = FichierGestion.ChargerEtNormaliser(cheminFichier);
                         FichierGestion.SauvegarderFichier(cheminSauvegarde, contenuNettoye);
-                        Console.WriteLine($"Nouveau fichier sauvegardé dans : {Path.GetFullPath("comme : MotsPossiblesEN_Valide.txt")}");
-                        
 
+                        Console.WriteLine($"Nouveau fichier sauvegardé dans : {Path.GetFullPath(cheminSauvegarde)}");
                         break;
+
 
 
                     default: break;
@@ -126,6 +126,7 @@ namespace Boogle_Dennery_Degioanni_TDG
 
             Console.WriteLine("Voici le plateau généré :");
             plateau.AfficherPlateau();
+            Console.ReadKey();
 
         }
     }

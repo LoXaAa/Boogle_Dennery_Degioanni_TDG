@@ -32,9 +32,7 @@ internal class FichierGestion
        
 
 
-        return NormaliserLignes(lignes);
-
-        return NormaliserLignes(lignes);
+        
     }
     #endregion
 

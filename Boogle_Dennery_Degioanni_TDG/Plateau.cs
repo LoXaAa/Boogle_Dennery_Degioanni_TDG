@@ -23,6 +23,15 @@ namespace Boogle_Dennery_Degioanni_TDG
 
             // Lettres disponibles pour les dés
             string lettresDisponibles = "AAAAAAAAABBCCDDDEEEEEEEEEEFFGGHHIIIIIIIIJKLLLLLMMMNNNNNNOOOOOOPPQRRRRRRSSSSSSTTTTTTUUUUUUVVWXYZ";
+            int nombreLettresNecessaires = nombreDe*6;
+            int nombreLettresDisponibles = lettresDisponibles.Length;
+            if (nombreLettresNecessaires > nombreLettresDisponibles) {
+                while (nombreLettresNecessaires > nombreLettresDisponibles)
+                {
+                    lettresDisponibles += "AAAAAAAAABBCCDDDEEEEEEEEEEFFGGHHIIIIIIIIJKLLLLLMMMNNNNNNOOOOOOPPQRRRRRRSSSSSSTTTTTTUUUUUUVVWXYZ";
+                    nombreLettresNecessaires -= 95;
+                }
+            }
             List<char> listeLettres = new List<char>(lettresDisponibles);
 
             // Créer les dés via la classe De
