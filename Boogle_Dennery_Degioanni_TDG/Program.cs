@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -27,17 +28,17 @@ namespace Boogle_Dennery_Degioanni_TDG
             Console.WriteLine(@"     _ _____ _   _   ____  _   _   ____   ___   ___   ____ _     _____ 
     | | ____| | | | |  _ \| | | | | __ ) / _ \ / _ \ / ___| |   | ____|
  _  | |  _| | | | | | | | | | | | |  _ \| | | | | | | |  _| |   |  _|  
-| |_| | |___| |_| | | |_| | |_| | | |_) | |_| | |_| | |_| | |___| |___ 
- \___/|_____|\___/  |____/ \___/  |____/ \___/ \___/ \____|_____|_____|");
+| || | || || | | || | || | | |) | || | || | || | || |___ 
+ \/||\/  |/ \/  |/ \/ \/ \|||");
 
             Thread.Sleep(2000);
             Console.WriteLine();
 
             Console.WriteLine(@" ___       _ _   _       _ _           _   _             
-|_ _|_ __ (_) |_(_) __ _| (_)___  __ _| |_(_) ___  _ __  
- | || '_ \| | __| |/ _` | | / __|/ _` | __| |/ _ \| '_ \ 
- | || | | | | |_| | (_| | | \__ \ (_| | |_| | (_) | | | |
-|___|_| |_|_|\__|_|\__,_|_|_|___/\__,_|\__|_|\___/|_| |_|");
+|_ | __ () |() __ _| ()___  __ | |(_) ___  _ __  
+ | || '_ \| | _| |/ _` | | / __|/ _` | __| |/ _ \| ' \ 
+ | || | | | | || | (| | | \__ \ (| | || | (_) | | | |
+||| |||\||\,|||/\,|\||\/|| ||");
 
             Thread.Sleep(2000);
             Console.WriteLine();
@@ -91,6 +92,11 @@ namespace Boogle_Dennery_Degioanni_TDG
 
             Thread.Sleep(2000);
 
+            // Instanciation du joueur
+            Console.WriteLine("\nEntrez votre nom :");
+            string nomJoueur = Console.ReadLine();
+            Joueur joueur = new Joueur(nomJoueur);
+
             Console.WriteLine("Entrez la taille du plateau (par exemple, 4 pour un plateau 4x4) :");
             int taillePlateau;
 
@@ -105,16 +111,28 @@ namespace Boogle_Dennery_Degioanni_TDG
             Console.WriteLine($"Création d'un plateau de {taillePlateau}x{taillePlateau} avec {nombreDe} dés.");
             plateau = new Plateau(nombreDe, taillePlateau);
 
+            Thread.Sleep(1000);
+
+            Console.WriteLine("Combien de temps doit durer un tour");
+            int tempsTour = Convert.ToInt32(Console.ReadLine()); 
+            while (tempsTour < 10)
+            {
+                Console.WriteLine("Veuillez saisir un temps supérieur a 10 secondes");
+                tempsTour = Convert.ToInt32(Console.ReadLine());
+            }
+
+            Stopwatch chrono = new Stopwatch();
+
 
 
 
 
             Thread.Sleep(1000);
             Console.WriteLine(@" ____    __ _           _         _             _            
-|  _ \  /_/| |__  _   _| |_    __| |_   _      | | ___ _   _ 
+|  _ \  //| |_  _   | |    _| |   _      | | ___ _   _ 
 | | | |/ _ \ '_ \| | | | __|  / _` | | | |  _  | |/ _ \ | | |
-| |_| |  __/ |_) | |_| | |_  | (_| | |_| | | |_| |  __/ |_| |
-|____/ \___|_.__/ \__,_|\__|  \__,_|\__,_|  \___/ \___|\__,_|");
+| || |  __/ |) | || | |  | (| | || | | || |  __/ || |
+|/ \|./ \,|\|  \,|\,|  \/ \|\,|");
             Thread.Sleep(2000);
 
             Console.WriteLine("Voici le plateau généré :");
@@ -122,29 +140,46 @@ namespace Boogle_Dennery_Degioanni_TDG
             string motUtilisateur;
             // Recherche de mots dans le dictionnaire
             Console.WriteLine("\nEntrez un mot pour vérifier s'il est valide (ou tapez 'exit' pour quitter) :");
+
+            // Recherche de mots dans le dictionnaire
             while ((motUtilisateur = Console.ReadLine()) != null && motUtilisateur.ToLower() != "exit")
             {
-                if (dico.RechDicho(motUtilisateur) == true && plateau.VerifierMot(motUtilisateur) == true)
+                motUtilisateur = motUtilisateur.ToUpper();
+
+                if (motUtilisateur.Length <= 1)
                 {
-                    Console.WriteLine($"Le mot '{motUtilisateur}' est valide.");
+                    Console.WriteLine("Le mot doit contenir au moins deux lettres.");
                 }
-                else if (dico.RechDicho(motUtilisateur) == false && plateau.VerifierMot(motUtilisateur) == true)
+                else if (joueur.Contain(motUtilisateur))
                 {
-                    Console.WriteLine($"Le mot '{motUtilisateur}' n'existe pas.");
+                    Console.WriteLine($"Vous avez déjà trouvé le mot '{motUtilisateur}'.");
                 }
-                else if (dico.RechDicho(motUtilisateur) == true && plateau.VerifierMot(motUtilisateur) == false)
+                else if (dico.RechDicho(motUtilisateur) && plateau.VerifierMot(motUtilisateur))
+                {
+                    Console.WriteLine($"Le mot '{motUtilisateur}' est valide !");
+                    joueur.Add_Mot(motUtilisateur);
+                }
+                else if (!dico.RechDicho(motUtilisateur) && plateau.VerifierMot(motUtilisateur))
+                {
+                    Console.WriteLine($"Le mot '{motUtilisateur}' n'existe pas dans le dictionnaire.");
+                }
+                else if (dico.RechDicho(motUtilisateur) && !plateau.VerifierMot(motUtilisateur))
                 {
                     Console.WriteLine($"Le mot '{motUtilisateur}' n'est pas sur le plateau.");
                 }
-                else if (dico.RechDicho(motUtilisateur) == false && plateau.VerifierMot(motUtilisateur) == false)
+                else
                 {
-                    Console.WriteLine($"Le mot '{motUtilisateur}' mot invalide.");
+                    Console.WriteLine($"Le mot '{motUtilisateur}' est invalide.");
                 }
 
+                // Affichage du score actuel
+                Console.WriteLine($"Score actuel de {joueur.Nom} : {joueur.Score}");
                 Console.WriteLine("\nEntrez un autre mot (ou tapez 'exit' pour quitter) :");
             }
 
-            Console.WriteLine("Merci d'avoir joué !");
+            // Résumé final
+            Console.WriteLine($"\nMerci d'avoir joué, {joueur.Nom} !");
+            Console.WriteLine($"Votre score final est de {joueur.Score} points.");
         }
     }
 }
