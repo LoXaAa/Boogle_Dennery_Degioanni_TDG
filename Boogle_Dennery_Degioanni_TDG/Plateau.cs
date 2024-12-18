@@ -65,6 +65,14 @@ namespace Boogle_Dennery_Degioanni_TDG
             }
         }
 
+        public void RelanceDes(Random r)
+        {
+            foreach (var De in des)
+            {
+                De.Lance(r);
+            }
+        }
+
         /// <summary>
         /// Vérifie si un mot peut être formé sur le plateau.
         /// </summary>
