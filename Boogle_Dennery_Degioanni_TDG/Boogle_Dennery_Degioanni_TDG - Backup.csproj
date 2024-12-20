@@ -11,7 +11,6 @@
     <PackageReference Include="Sdcb.WordCloud" Version="2.0.1" />
     <PackageReference Include="System.Drawing.Common" Version="9.0.0" />
     <PackageReference Include="System.Drawing.Primitives" Version="4.3.0" />
-    <PackageReference Include="WordCloud" Version="1.0.0.3" />
     <PackageReference Include="WordCloudSharp" Version="1.1.0" />
   </ItemGroup>
 

@@ -22,7 +22,7 @@ namespace Boogle_Dennery_Degioanni_TDG
         /// </summary>
         public char LettreVisible
         {
-            get { return lettreVisible; }
+            get => lettreVisible;
         }
         #endregion
         #region Constructeur qui initialise un dé
@@ -37,10 +37,9 @@ namespace Boogle_Dennery_Degioanni_TDG
             {
                 int index = random.Next(lettresDisponibles.Count);
                 faces[i] = lettresDisponibles[index];
-                lettresDisponibles.RemoveAt(index); // Retirer la lettre utilisée
+                lettresDisponibles.RemoveAt(index); 
             }
 
-            // Initialiser une face visible par défaut
             lettreVisible = faces[0];
         }
         #endregion

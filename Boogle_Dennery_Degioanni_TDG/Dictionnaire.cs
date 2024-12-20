@@ -4,23 +4,18 @@ namespace Boogle_Dennery_Degioanni_TDG
 {
     internal class Dictionnaire
     {
-        private string[] mots;  // Tableau des mots valides
-        private string langue;  // Langue du dictionnaire ("FR" ou "EN")
+        private string[] mots;
 
-        /// <summary>
-        /// Propriété pour accéder aux mots chargés.
-        /// </summary>
+        
+        private string langue;
+
         public string[] Mots => mots;
 
-        /// <summary>
-        /// Constructeur du dictionnaire.
-        /// </summary>
-        /// <param name="langue">Langue ("FR" ou "EN")</param>
         public Dictionnaire(string langue)
         {
             if (langue != "FR" && langue != "EN")
             {
-                throw new ArgumentException("Langue invalide. Utilisez 'FR' ou 'EN'.");
+                throw new ArgumentException("Langue invalide. Choisissez 'FR' ou 'EN'.");
             }
 
             this.langue = langue;
@@ -28,7 +23,7 @@ namespace Boogle_Dennery_Degioanni_TDG
         }
 
         /// <summary>
-        /// Charge et trie les mots en fonction de la langue.
+        /// Charge les mots depuis un fichier, puis les trie.
         /// </summary>
         private void ChargerMots()
         {
@@ -40,25 +35,23 @@ namespace Boogle_Dennery_Degioanni_TDG
 
                 if (mots.Length == 0)
                 {
-                    Console.WriteLine("Aucun mot n'a été trouvé dans le fichier.");
+                    mots = Array.Empty<string>();
+                    return;
                 }
-                else
-                {
-                    mots = TrierFusion(mots); // Tri fusion pour garantir l'ordre alphabétique
-                }
+
+                mots = TrierFusion(mots);
             }
-            catch (FileNotFoundException ex)
+            catch (FileNotFoundException)
             {
-                Console.WriteLine($"Erreur : {ex.Message}");
-                mots = Array.Empty<string>(); // Initialisation d'un tableau vide en cas d'erreur
+                mots = Array.Empty<string>();
             }
         }
 
         /// <summary>
-        /// Méthode de tri fusion.
+        /// Trie un tableau de chaînes en utilisant un tri fusion.
         /// </summary>
-        /// <param name="tableau">Tableau à trier</param>
-        /// <returns>Tableau trié</returns>
+        /// <param name="tableau">Le tableau à trier.</param>
+        /// <returns>Le tableau trié.</returns>
         private string[] TrierFusion(string[] tableau)
         {
             if (tableau.Length <= 1) return tableau;
@@ -77,11 +70,11 @@ namespace Boogle_Dennery_Degioanni_TDG
         }
 
         /// <summary>
-        /// Fusionne deux tableaux triés.
+        /// Fusionne deux tableaux triés en un seul tableau trié.
         /// </summary>
-        /// <param name="gauche">Tableau gauche trié</param>
-        /// <param name="droite">Tableau droit trié</param>
-        /// <returns>Tableau fusionné et trié</returns>
+        /// <param name="gauche">Le tableau gauche trié.</param>
+        /// <param name="droite">Le tableau droit trié.</param>
+        /// <returns>Un tableau fusionné et trié.</returns>
         private string[] Fusionner(string[] gauche, string[] droite)
         {
             string[] resultat = new string[gauche.Length + droite.Length];
@@ -112,11 +105,12 @@ namespace Boogle_Dennery_Degioanni_TDG
             return resultat;
         }
 
+
         /// <summary>
-        /// Recherche un mot dans le dictionnaire (recherche dichotomique).
+        /// Recherche un mot dans le dictionnaire en utilisant une recherche dichotomique.
         /// </summary>
-        /// <param name="mot">Mot à rechercher</param>
-        /// <returns>True si le mot est trouvé, false sinon</returns>
+        /// <param name="mot">Le mot à rechercher.</param>
+        /// <returns>True si le mot est trouvé, false sinon.</returns>
         public bool RechDicho(string mot)
         {
             mot = mot.ToUpper();
@@ -126,10 +120,10 @@ namespace Boogle_Dennery_Degioanni_TDG
         /// <summary>
         /// Recherche dichotomique récursive.
         /// </summary>
-        /// <param name="mot">Mot à rechercher</param>
-        /// <param name="debut">Index de début</param>
-        /// <param name="fin">Index de fin</param>
-        /// <returns>True si le mot est trouvé, false sinon</returns>
+        /// <param name="mot">Le mot à rechercher.</param>
+        /// <param name="debut">Index de début.</param>
+        /// <param name="fin">Index de fin.</param>
+        /// <returns>True si le mot est trouvé, false sinon.</returns>
         private bool RechercheDichotomique(string mot, int debut, int fin)
         {
             if (debut > fin) return false;
@@ -145,9 +139,9 @@ namespace Boogle_Dennery_Degioanni_TDG
         }
 
         /// <summary>
-        /// Méthode ToString pour afficher des informations sur le dictionnaire.
+        /// Retourne une description de l'état du dictionnaire.
         /// </summary>
-        /// <returns>Description du dictionnaire</returns>
+        /// <returns>Une chaîne décrivant la langue et le nombre de mots du dictionnaire.</returns>
         public override string ToString()
         {
             return $"Dictionnaire ({langue}) - Nombre de mots : {mots.Length}";
