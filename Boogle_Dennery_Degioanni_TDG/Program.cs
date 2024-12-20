@@ -11,11 +11,11 @@ namespace Boogle_Dennery_Degioanni_TDG
     {
         #region SaisirNombre
         /// <summary>
-        /// Méthode pour saisir un nombre entier valide supérieur ou égal à un.
+        /// Permet de saisir un nombre supérieur ou égal à une valeur donnée.
         /// </summary>
-        /// <param name="message">Message à afficher pour demander une entrée utilisateur.</param>
-        /// <param name="minValue">Valeur minimale autorisée.</param>
-        /// <returns>Un entier saisi par l'utilisateur.</returns>
+        /// <param name="message">Message que l'on affiche</param>
+        /// <param name="minValue">Valeur minimale autorisée</param>
+        /// <returns>L'entier saisi</returns>
         public static int SaisirNombre(string message, int minValue = 1)
         {
             int result;
@@ -25,7 +25,7 @@ namespace Boogle_Dennery_Degioanni_TDG
                 string input = Console.ReadLine();
                 if (!int.TryParse(input, out result) || result < minValue)
                 {
-                    Console.WriteLine($"Veuillez entrer un nombre entier supérieur ou égal à {minValue}.");
+                    Console.WriteLine($"Il faut entrer un nombre entier supérieur ou égal à {minValue}.");
                 }
             } while (result < minValue);
 
@@ -35,7 +35,6 @@ namespace Boogle_Dennery_Degioanni_TDG
 
         static void Main(string[] args)
         {
-            // Affichage de l'en-tête
             Console.WriteLine(@"     _                  _         ____                    _      
     | | ___ _   _    __| |_   _  | __ )  ___   ___   __ _| | ___ 
  _  | |/ _ \ | | |  / _` | | | | |  _ \ / _ \ / _ \ / _` | |/ _ \
@@ -53,12 +52,11 @@ namespace Boogle_Dennery_Degioanni_TDG
             Thread.Sleep(1000);
             Console.WriteLine();
 
-            string langueJeu; // Langue par défaut
+            string langueJeu; 
             string cheminFichier = "";
             string cheminSauvegarde = "";
             Plateau plateau;
 
-            // Sélection de la langue
             Console.WriteLine("Selection de la langue\n\nOption 1 : Français\nOption 2 : Anglais");
             int choixLangue = SaisirNombre("\nSélectionnez 1 ou 2 pour la langue :");
 
@@ -75,13 +73,9 @@ namespace Boogle_Dennery_Degioanni_TDG
 
             }
 
-
-            // Instanciation du dictionnaire
             Dictionnaire dico = new Dictionnaire(langueJeu);
             Thread.Sleep(2000);
 
-
-            // Instanciation des joueurs
             int nombreJoueurs = SaisirNombre("\nCombien de joueurs jouent ?");
             Joueur[] joueurs = new Joueur[nombreJoueurs];
 
@@ -102,7 +96,6 @@ namespace Boogle_Dennery_Degioanni_TDG
                 joueurs[i] = new Joueur(nomJoueur,langueJeu);
             }
 
-            // Configuration des manches
             int manches = SaisirNombre("\nCombien de manches voulez-vous jouer ?");
 
             int taillePlateau = SaisirNombre("\nEntrez la taille du plateau (par exemple, 4 pour un plateau 4x4) :",4);
@@ -117,12 +110,10 @@ namespace Boogle_Dennery_Degioanni_TDG
             plateau = new Plateau(nombreDe, taillePlateau);
             Thread.Sleep(1000);
 
-            // Configuration du temps par tour
             int tempsTour = SaisirNombre("\nCombien de temps doit durer un tour (en secondes) ?", 10);
 
             Stopwatch chrono = new Stopwatch();
 
-            // Début des manches
             Console.Clear();
             Console.WriteLine(@" ____    __ _           _         _           _            
 |  _ \  /_/| |__  _   _| |_    __| |_   _    (_) ___ _   _ 
@@ -220,7 +211,6 @@ namespace Boogle_Dennery_Degioanni_TDG
             }
 
             Console.Clear();
-            // Résumé final
             Console.WriteLine("\n=== Résultats finaux ===");
             Thread.Sleep(1000);
             foreach (var joueur in joueurs)
@@ -235,7 +225,6 @@ namespace Boogle_Dennery_Degioanni_TDG
             Console.ResetColor();
             Console.WriteLine("Merci d'avoir joué !");
 
-            // Générer le nuage de mots
             Thread.Sleep(2000);
             NuageMots.CreerNuageMots(joueurs);
         }

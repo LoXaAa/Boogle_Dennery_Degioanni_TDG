@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace Boogle_Dennery_Degioanni_TDG
 {
@@ -48,10 +49,10 @@ namespace Boogle_Dennery_Degioanni_TDG
         }
 
         /// <summary>
-        /// Trie un tableau de chaînes en utilisant un tri fusion.
+        /// Trie un tableau de chaînes de caractères via le triFusion.
         /// </summary>
-        /// <param name="tableau">Le tableau à trier.</param>
-        /// <returns>Le tableau trié.</returns>
+        /// <param name="tableau">Le tableau à trier</param>
+        /// <returns>Le tableau trié</returns>
         private string[] TrierFusion(string[] tableau)
         {
             if (tableau.Length <= 1) return tableau;
@@ -70,11 +71,11 @@ namespace Boogle_Dennery_Degioanni_TDG
         }
 
         /// <summary>
-        /// Fusionne deux tableaux triés en un seul tableau trié.
+        /// Fusionne deux tableaux triés en un seul tableau
         /// </summary>
-        /// <param name="gauche">Le tableau gauche trié.</param>
-        /// <param name="droite">Le tableau droit trié.</param>
-        /// <returns>Un tableau fusionné et trié.</returns>
+        /// <param name="gauche">Le tableau gauche trié</param>
+        /// <param name="droite">Le tableau droit trié</param>
+        /// <returns>Un tableau trié</returns>
         private string[] Fusionner(string[] gauche, string[] droite)
         {
             string[] resultat = new string[gauche.Length + droite.Length];
@@ -107,10 +108,10 @@ namespace Boogle_Dennery_Degioanni_TDG
 
 
         /// <summary>
-        /// Recherche un mot dans le dictionnaire en utilisant une recherche dichotomique.
+        /// Recherche un mot dans le dictionnaire via recherche dichotomique
         /// </summary>
-        /// <param name="mot">Le mot à rechercher.</param>
-        /// <returns>True si le mot est trouvé, false sinon.</returns>
+        /// <param name="mot">Le mot cible</param>
+        /// <returns>True si le mot est trouvé, false sinon</returns>
         public bool RechDicho(string mot)
         {
             mot = mot.ToUpper();
@@ -118,12 +119,12 @@ namespace Boogle_Dennery_Degioanni_TDG
         }
 
         /// <summary>
-        /// Recherche dichotomique récursive.
+        /// Recherche dichotomique récursive
         /// </summary>
-        /// <param name="mot">Le mot à rechercher.</param>
-        /// <param name="debut">Index de début.</param>
-        /// <param name="fin">Index de fin.</param>
-        /// <returns>True si le mot est trouvé, false sinon.</returns>
+        /// <param name="mot">Le mot cible</param>
+        /// <param name="debut">Index de début</param>
+        /// <param name="fin">Index de fin</param>
+        /// <returns>True si le mot est trouvé, false sinon</returns>
         private bool RechercheDichotomique(string mot, int debut, int fin)
         {
             if (debut > fin) return false;
@@ -139,9 +140,9 @@ namespace Boogle_Dennery_Degioanni_TDG
         }
 
         /// <summary>
-        /// Retourne une description de l'état du dictionnaire.
+        /// Affichage dictionnaire
         /// </summary>
-        /// <returns>Une chaîne décrivant la langue et le nombre de mots du dictionnaire.</returns>
+        /// <returns>Langue et nombre de mots du dictionnaire</returns>
         public override string ToString()
         {
             return $"Dictionnaire ({langue}) - Nombre de mots : {mots.Length}";
