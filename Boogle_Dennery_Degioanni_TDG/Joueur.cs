@@ -14,12 +14,6 @@ namespace Boogle_Dennery_Degioanni_TDG
         #endregion
 
         #region Constructeur
-        /// <summary>
-        /// Initialise un joueur avec un nom et la langue du jeu.
-        /// </summary>
-        /// <param name="nom">Nom du joueur.</param>
-        /// <param name="langue">Langue du jeu ("FR" ou "EN").</param>
-        /// <exception cref="ArgumentException">Si le nom est null ou vide ou si la langue est invalide.</exception>
         public Joueur(string nom, string langue)
         {
             if (string.IsNullOrWhiteSpace(nom))
