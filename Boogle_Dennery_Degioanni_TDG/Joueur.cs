@@ -35,19 +35,19 @@ namespace Boogle_Dennery_Degioanni_TDG
 
         #region Gestion des mots trouvés
         /// <summary>
-        /// Vérifie si un mot a déjà été trouvé par le joueur.
+        /// Vérifie si un mot a déjà été trouvé par le joueur
         /// </summary>
-        /// <param name="mot">Mot à vérifier.</param>
-        /// <returns>Vrai si le mot a déjà été trouvé, faux sinon.</returns>
+        /// <param name="mot">Mot à vérifier</param>
+        /// <returns>True si le mot a déjà été trouvé, false sinon</returns>
         public bool Contain(string mot)
         {
             return motsTrouves.Contains(mot.ToUpper());
         }
 
         /// <summary>
-        /// Ajoute un mot trouvé par le joueur et met à jour son score.
+        /// Ajoute un mot trouvé par le joueur et update son score
         /// </summary>
-        /// <param name="mot">Mot trouvé.</param>
+        /// <param name="mot">Mot trouvé</param>
         public void AddMot(string mot)
         {
             mot = mot.ToUpper();
@@ -67,11 +67,11 @@ namespace Boogle_Dennery_Degioanni_TDG
 
         #region Calcul du score
         /// <summary>
-        /// Calcule le score d'un mot selon les règles du Scrabble et la langue du jeu.
+        /// Calcul du score d'un mot basé sur le sccrable
         /// </summary>
-        /// <param name="mot">Mot dont on veut calculer le score.</param>
-        /// <param name="langue">Langue du jeu ("FR" ou "EN").</param>
-        /// <returns>Score du mot.</returns>
+        /// <param name="mot">Mot dont on veut calculer le score</param>
+        /// <param name="langue">Langue du jeu</param>
+        /// <returns>Score du mot</returns>
         public int CalculerScoreMot(string mot, string langue)
         {
             Dictionary<char, int> valeursLettres = langue == "FR" ? new Dictionary<char, int>
@@ -104,19 +104,19 @@ namespace Boogle_Dennery_Degioanni_TDG
         }
 
         /// <summary>
-        /// Retourne la liste des mots trouvés par le joueur.
+        /// Retourne la liste des mots trouvés par le joueur
         /// </summary>
-        /// <returns>Liste des mots trouvés.</returns>
+        /// <returns>Liste des mots trouvés</returns>
         public IReadOnlyList<string> GetMotsTrouves()
         {
             return motsTrouves.AsReadOnly();
         }
 
         /// <summary>
-        /// Retourne le score individuel d'un mot trouvé.
+        /// Retourne le score du mot trouvé
         /// </summary>
-        /// <param name="mot">Mot dont on veut connaître le score.</param>
-        /// <returns>Score du mot.</returns>
+        /// <param name="mot">Mot dont on veut connaître le score</param>
+        /// <returns>Score du mot</returns>
         public int GetScoreMot(string mot)
         {
             return CalculerScoreMot(mot, langue);
@@ -125,9 +125,9 @@ namespace Boogle_Dennery_Degioanni_TDG
 
         #region Affichage
         /// <summary>
-        /// Retourne une description complète du joueur.
+        /// Affiche infos joueur
         /// </summary>
-        /// <returns>Description du joueur.</returns>
+        /// <returns>Description du joueur</returns>
         public override string ToString()
         {
             string description = $"Joueur: {Nom}\nScore: {Score}\nMots trouvés:\n";

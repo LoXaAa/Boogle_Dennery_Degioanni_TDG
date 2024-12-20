@@ -35,7 +35,7 @@ namespace Boogle_Dennery_Degioanni_TDG
 
         #region Méthodes
         /// <summary>
-        /// Affiche le plateau de jeu en grille.
+        /// Affiche le plateau
         /// </summary>
         public void AfficherPlateau()
         {
@@ -59,10 +59,10 @@ namespace Boogle_Dennery_Degioanni_TDG
         }
 
         /// <summary>
-        /// Vérifie si un mot peut être formé sur le plateau.
+        /// Vérifie si un mot peut être formé sur le plateau
         /// </summary>
-        /// <param name="mot">Le mot à vérifier.</param>
-        /// <returns>Vrai si le mot est valide, faux sinon.</returns>
+        /// <param name="mot">Le mot à vérifier</param>
+        /// <returns>Vrai si le mot est valide, faux sinon</returns>
         public bool VerifierMot(string mot)
         {
             if (string.IsNullOrWhiteSpace(mot) || mot.Length <= 1)
@@ -91,8 +91,14 @@ namespace Boogle_Dennery_Degioanni_TDG
         }
 
         /// <summary>
-        /// Méthode récursive pour vérifier si le mot peut être formé à partir d'une position donnée.
+        /// Vérification de la formation du mot à partir d'une position
         /// </summary>
+        /// <param name="mot">mot cible</param>
+        /// <param name="index">index du mot recherché</param>
+        /// <param name="x">position x</param>
+        /// <param name="y">position y</param>
+        /// <param name="visited">état de la case (parcourue ou non)</param>
+        /// <returns>Vrai si le mot est trouvé, false sinon</returns>
         private bool VerifierMotRecursif(string mot, int index, int x, int y, bool[,] visited)
         {
             if (index == mot.Length)

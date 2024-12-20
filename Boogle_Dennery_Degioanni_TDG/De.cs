@@ -39,7 +39,7 @@ namespace Boogle_Dennery_Degioanni_TDG
         /// <summary>
         /// Méthode qui lance le dé aléatoirement (dé non pipé à 6 faces)
         /// </summary>
-        /// <param name="r">une valeur aléatoire.</param>
+        /// <param name="r">une valeur aléatoire</param>
         public void Lance(Random r)
         {
             int indexAleatoire = r.Next(0, faces.Length);
