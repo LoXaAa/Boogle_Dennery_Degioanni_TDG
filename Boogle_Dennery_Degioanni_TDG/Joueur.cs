@@ -48,14 +48,14 @@ namespace Boogle_Dennery_Degioanni_TDG
         /// Ajoute un mot trouvé par le joueur et met à jour son score.
         /// </summary>
         /// <param name="mot">Mot trouvé.</param>
-        public void Add_Mot(string mot)
+        public void Add_Mot(string mot, string langue)
         {
             mot = mot.ToUpper();
 
             if (!Contain(mot))
             {
                 MotsTrouves.Add(mot);
-                int scoreMot = CalculerScoreMot(mot);
+                int scoreMot = CalculerScoreMot(mot, langue);
                 Score += scoreMot;
             }
             else
@@ -72,14 +72,34 @@ namespace Boogle_Dennery_Degioanni_TDG
         /// </summary>
         /// <param name="mot">Mot dont on veut calculer le score.</param>
         /// <returns>Score du mot.</returns>
-        private int CalculerScoreMot(string mot)
+        private int CalculerScoreMot(string mot, string langue)
         {
-            Dictionary<char, int> valeursLettres = new Dictionary<char, int>
+
+            Dictionary<char, int> valeursLettres = new Dictionary<char, int> () ;
+
+            // Initialisation des valeurs en fonction de la langue
+            if (langue == "FR")
             {
-                {'A', 1}, {'B', 3}, {'C', 3}, {'D', 2}, {'E', 1}, {'F', 4}, {'G', 2}, {'H', 4}, {'I', 1}, {'J', 8},
-                {'K', 5}, {'L', 1}, {'M', 3}, {'N', 1}, {'O', 1}, {'P', 3}, {'Q', 10}, {'R', 1}, {'S', 1}, {'T', 1},
-                {'U', 1}, {'V', 4}, {'W', 4}, {'X', 8}, {'Y', 4}, {'Z', 10}
-            };
+                valeursLettres = new Dictionary<char, int>
+                {
+                    {'A', 1}, {'B', 3}, {'C', 3}, {'D', 2}, {'E', 1}, {'F', 4}, {'G', 2},
+                    {'H', 4}, {'I', 1}, {'J', 8}, {'K', 10}, {'L', 1}, {'M', 2}, {'N', 1},
+                    {'O', 1}, {'P', 3}, {'Q', 8}, {'R', 1}, {'S', 1}, {'T', 1}, {'U', 1},
+                    {'V', 4}, {'W', 10}, {'X', 10}, {'Y', 10}, {'Z', 10}
+                };
+            }
+            else if (langue == "EN")
+            {
+                valeursLettres = new Dictionary<char, int>
+                {
+                    {'A', 1}, {'B', 3}, {'C', 3}, {'D', 2}, {'E', 1}, {'F', 4}, {'G', 2},
+                    {'H', 4}, {'I', 1}, {'J', 8}, {'K', 5}, {'L', 1}, {'M', 3}, {'N', 1},
+                    {'O', 1}, {'P', 3}, {'Q', 10}, {'R', 1}, {'S', 1}, {'T', 1}, {'U', 1},
+                    {'V', 4}, {'W', 4}, {'X', 8}, {'Y', 4}, {'Z', 10}
+                };
+            }
+           
+
 
             int score = 0;
 

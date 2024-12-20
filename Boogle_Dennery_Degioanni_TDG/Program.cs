@@ -206,7 +206,7 @@ namespace Boogle_Dennery_Degioanni_TDG
                             plateau.AfficherPlateau();
                             Console.WriteLine();
                             Console.WriteLine($"Bravo, {joueur.Nom} ! Le mot '{motUtilisateur}' est valide !");
-                            joueur.Add_Mot(motUtilisateur);
+                            joueur.Add_Mot(motUtilisateur, langueJeu);
                         }
                         else if (!dico.RechDicho(motUtilisateur) && plateau.VerifierMot(motUtilisateur))
                         {
