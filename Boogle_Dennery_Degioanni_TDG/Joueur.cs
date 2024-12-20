@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Boogle_Dennery_Degioanni_TDG
 {
-    internal class Joueur
+    public class Joueur
     {
         #region Attributs
         public string Nom { get; private set; } 
