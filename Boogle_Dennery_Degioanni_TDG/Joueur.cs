@@ -15,11 +15,6 @@ namespace Boogle_Dennery_Degioanni_TDG
         #endregion
 
         #region Constructeur
-        /// <summary>
-        /// Initialise un joueur avec un nom.
-        /// </summary>
-        /// <param name="nom">Nom du joueur.</param>
-        /// <exception cref="ArgumentException">Si le nom est null ou vide.</exception>
         public Joueur(string nom)
         {
             if (string.IsNullOrWhiteSpace(nom))
