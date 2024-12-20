@@ -33,7 +33,6 @@ namespace Boogle_Dennery_Degioanni_TDG
                                                     |___/        ");
 
             Thread.Sleep(2000);
-            Console.WriteLine();
 
             Console.WriteLine(@" ___       _ _   _       _ _           _   _             
 |_ _|_ __ (_) |_(_) __ _| (_)___  __ _| |_(_) ___  _ __  
